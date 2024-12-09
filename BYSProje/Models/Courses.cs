@@ -12,5 +12,8 @@ namespace BYSProje.Models
         public string CourseName {get; set;}
         public float Credits {get; set;}
         public int InstructorID {get; set;}
+        public Instructors? Instructor { get; set; } // navigasyon ilişkiyi belirtir.
+        
+        public Student_Courses StudentCourses {get; set;}
     }
 }
