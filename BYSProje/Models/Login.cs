@@ -7,6 +7,7 @@ namespace BYSProje.Models
 {
     public class Login
     {
-        
+        public int UserNo {get; set;}
+        public string Password {get; set;}
     }
 }
