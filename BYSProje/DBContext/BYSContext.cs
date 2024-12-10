@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-
-namespace BYSProje.Models.Entity;
+using BYSProje.Models;
+namespace BYSProje.DBContext.Entity;
 
     public partial class BYSContext : DbContext
     {
@@ -26,7 +26,7 @@ namespace BYSProje.Models.Entity;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
        
-      => optionsBuilder.UseSqlServer("Server=KAAn;Database=BYS;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
+      => optionsBuilder.UseSqlServer("Server=KAAN;Database=BYS;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -54,7 +54,7 @@ namespace BYSProje.Models.Entity;
 
                entity.ToTable("Instructor");
                
-               entity.Property(e => e.InstructorID).HasColumnName("InstructerID");
+               entity.Property(e => e.InstructorID).HasColumnName("InstructorID");
                entity.Property(e => e.FirstName).HasMaxLength(50);
                entity.Property(e => e.LastName).HasMaxLength(50);
                entity.Property(e => e.Email).HasMaxLength(100);

@@ -14,6 +14,6 @@ namespace BYSProje.Models
         public int InstructorID {get; set;}
         public Instructors? Instructor { get; set; } // navigasyon ilişkiyi belirtir.
         
-        public Student_Courses StudentCourses {get; set;}
+        public ICollection<Student_Courses> StudentCourse {get; set;}
     }
 }
