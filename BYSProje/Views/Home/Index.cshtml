@@ -1,3 +1,7 @@
+@model Login;
+@{
+    Layout=null;
+}
 <!DOCTYPE html>
 <html lang="tr">
 
@@ -50,14 +54,15 @@
         </div>
         
         <!-- Öğrenci Giriş Formu -->
-        <form id="studentForm" class="theme-student">
+        <form  id="1" method="post" class="theme-student" asp-controller="Home" asp-action="SubmitForm">
+             <input type="hidden" name="formID" value="1" />
             <div class="mb-3">
-                <label for="studentNo" class="form-label">Öğrenci Numarası</label>
-                <input type="text" class="form-control" id="studentNo" placeholder="Öğrenci numaranızı girin" required>
+                <label  asp-for="UserNo" class="form-label">Öğrenci Numarası</label>
+                <input  asp-for="UserNo" class="form-control"  placeholder="Öğrenci numaranızı girin" required>
             </div>
             <div class="mb-3">
-                <label for="studentPassword" class="form-label">Şifre</label>
-                <input type="password" class="form-control" id="studentPassword" placeholder="Şifrenizi girin" required>
+                <label asp-for="Password" class="form-label">Şifre</label>
+                <input asp-for="Password" class="form-control"  placeholder="Şifrenizi girin" required>
             </div>
             <div class="mb-3 text-end">
                 <a href="/sifre-sifirla" class="text-decoration-none">Şifreni mi unuttun?</a>
@@ -66,14 +71,15 @@
         </form>
 
         <!-- Akademisyen Giriş Formu -->
-        <form id="instructorForm" class="theme-instructor hidden">
+        <form id="2" method="post"  class="theme-instructor hidden" asp-controller="Home" asp-action="SubmitForm">
+            <input type="hidden" name="formID" value="2" />
             <div class="mb-3">
-                <label for="instructorNo" class="form-label">Akademisyen Numarası</label>
-                <input type="text" class="form-control" id="instructorNo" placeholder="Akademisyen numaranızı girin" required>
+                <label asp-for="UserNo" class="form-label">Akademisyen Numarası</label>
+                <input asp-for="UserNo" class="form-control"  placeholder="Akademisyen numaranızı girin" required>
             </div>
             <div class="mb-3">
-                <label for="instructorPassword" class="form-label">Şifre</label>
-                <input type="password" class="form-control" id="instructorPassword" placeholder="Şifrenizi girin" required>
+                <label asp-for="Password" class="form-label">Şifre</label>
+                <input  asp-for="Password" class="form-control" placeholder="Şifrenizi girin" required>
             </div>
             <div class="mb-3 text-end">
                 <a href="/sifre-sifirla" class="text-decoration-none">Şifreni mi unuttun?</a>
@@ -85,8 +91,8 @@
     <script>
         function toggleForm() {
             const userType = document.getElementById("userType").value;
-            const studentForm = document.getElementById("studentForm");
-            const instructorForm = document.getElementById("instructorForm");
+            const studentForm = document.getElementById("1");
+            const instructorForm = document.getElementById("2");
 
             if (userType === "student") {
                 studentForm.classList.remove("hidden");

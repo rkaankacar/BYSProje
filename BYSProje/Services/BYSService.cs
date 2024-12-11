@@ -7,9 +7,9 @@ namespace BYSProje.Services
 {
     public class BYSService<T> : IBYSService<T> where T: class
     {
-         private readonly BYSRepository<T> _repository;
+         private readonly IBYSRepository<T> _repository;
 
-        public  BYSService(BYSRepository<T> repository)
+        public  BYSService(IBYSRepository<T> repository)
         {
              _repository = repository;
         }
@@ -23,10 +23,9 @@ namespace BYSProje.Services
         public async Task DeleteAsync(int id)
         {
            
-            if (id !=null)
+            if (id > 0)
             {
-                var service = id;
-                await _repository.DeleteAsync(service);
+                await _repository.DeleteAsync(id);
             }
         }
 
@@ -44,7 +43,12 @@ namespace BYSProje.Services
         {
              await _repository.UpdateAsync(entity);
         }
-    }
 
+           public async Task<T> GetByConditionAsync(int userNo, string password)
+      {
+        return await _repository.GetByConditionAsync(userNo, password);
+        }
+    }
+        
    
 }

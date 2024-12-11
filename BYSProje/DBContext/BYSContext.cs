@@ -18,15 +18,15 @@ namespace BYSProje.DBContext.Entity;
             //ef core ile çalışan bir dbcontextin çalışmasını sağlar ve ayarları optionstan alır.
          }
 
-         public virtual DbSet<Courses> Course {get;set;}
-         public virtual DbSet<Instructors> Instructor {get;set;}
+         public virtual DbSet<Courses> Courses {get;set;}
+         public virtual DbSet<Instructors> Instructors {get;set;}
          public virtual DbSet<Login> Login {get;set;}
-         public virtual DbSet<Students> Student {get;set;}
-         public virtual DbSet<Student_Courses> StudentCourse {get;set;}
+         public virtual DbSet<Students> Students {get;set;}
+         public virtual DbSet<Student_Courses> Student_Courses {get;set;}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
        
-      => optionsBuilder.UseSqlServer("Server=KAAN;Database=BYS;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
+      => optionsBuilder.UseSqlServer("Server=KAAN\\SQLEXPRESS;Initial Catalog=BYS;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,7 +34,7 @@ namespace BYSProje.DBContext.Entity;
            {
             entity.HasKey(e =>e.CourseID).HasName("PK_Courses");
             
-            entity.ToTable("Course");
+            entity.ToTable("Courses");
             
             entity.Property(e => e.CourseID).HasColumnName("CourseID");
             entity.Property(e => e.CourseName).HasMaxLength(100);
@@ -52,7 +52,7 @@ namespace BYSProje.DBContext.Entity;
            {
                entity.HasKey(e =>e.InstructorID).HasName("PK_Instructors");
 
-               entity.ToTable("Instructor");
+               entity.ToTable("Instructors");
                
                entity.Property(e => e.InstructorID).HasColumnName("InstructorID");
                entity.Property(e => e.FirstName).HasMaxLength(50);
@@ -66,7 +66,7 @@ namespace BYSProje.DBContext.Entity;
            {
               entity.HasKey(e => e.StudentID).HasName("PK_Students");
 
-              entity.ToTable("Student");
+              entity.ToTable("Students");
 
               entity.Property(e => e.StudentID).HasColumnName("StudentID");
               entity.Property(e => e.First_Name).HasMaxLength(50);
@@ -88,7 +88,7 @@ namespace BYSProje.DBContext.Entity;
            modelBuilder.Entity<Student_Courses>(entity =>
            {
               entity.HasKey(e => new {e.CourseID,e.StudentID}).HasName("PK_Student_Course");
-              entity.ToTable("StudentCourse");
+              entity.ToTable("Student_Courses");
               entity.Property(e => e.StudentID).HasColumnName("StudentID");
               entity.Property(e => e.CourseID).HasColumnName("CourseID");
               

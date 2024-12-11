@@ -1,4 +1,17 @@
+using BYSProje.Services;
+using BYSProje.Models; 
+using BYSProje.Repositorys;
+using Microsoft.EntityFrameworkCore;
+using BYSProje.DBContext.Entity;
+
 var builder = WebApplication.CreateBuilder(args);
+
+ builder.Services.AddDbContext<BYSContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IBYSRepository<Students>, BYSRepository<Students>>();
+builder.Services.AddScoped<IBYSService<Students>, BYSService<Students>>();
+builder.Services.AddScoped<IBYSRepository<Instructors>, BYSRepository<Instructors>>();
+builder.Services.AddScoped<IBYSService<Instructors>, BYSService<Instructors>>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

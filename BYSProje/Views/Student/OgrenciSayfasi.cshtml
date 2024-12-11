@@ -1,0 +1,13 @@
+@model StudentsViewModel;
+
+<div class="card" style="width: 18rem;">
+  <div class="card-header">
+   Hoşgeldin @Model.First_Name
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">İsim-Soyisim: @Model.First_Name @Model.Last_Name</li>
+    <li class="list-group-item">Öğrenci No: @Model.StudentID</li>
+    <li class="list-group-item">Bölüm: @Model.Major</li>
+    <li class="list-group-item">E-mail: @Model.Email</li>
+  </ul>
+</div>

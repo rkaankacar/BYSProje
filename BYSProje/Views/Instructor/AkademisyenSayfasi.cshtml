@@ -1,0 +1,15 @@
+@model InstructorsViewModel;
+@{
+  Layout="_AkademisyenSayfa";
+}
+<div class="card" style="width: 18rem;">
+  <div class="card-header">
+   Hoşgeldin @Model.FirstName
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">İsim-Soyisim: @Model.FirstName @Model.LastName</li>
+    <li class="list-group-item">Akademisyen No: @Model.InstructorID</li>
+    <li class="list-group-item">Departman: @Model.Department</li>
+    <li class="list-group-item">E-mail: @Model.Email</li>
+  </ul>
+</div>

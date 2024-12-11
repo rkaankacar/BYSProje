@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rahim\\OneDrive\\Masaüstü\\VeriProje\\BYSProje\\BYSProje.csproj": {}
+    "c:\\Users\\rahim\\OneDrive\\Masaüstü\\VeriProje\\BYSProje\\BYSProje.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rahim\\OneDrive\\Masaüstü\\VeriProje\\BYSProje\\BYSProje.csproj": {
+    "c:\\Users\\rahim\\OneDrive\\Masaüstü\\VeriProje\\BYSProje\\BYSProje.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rahim\\OneDrive\\Masaüstü\\VeriProje\\BYSProje\\BYSProje.csproj",
+        "projectUniqueName": "c:\\Users\\rahim\\OneDrive\\Masaüstü\\VeriProje\\BYSProje\\BYSProje.csproj",
         "projectName": "BYSProje",
-        "projectPath": "C:\\Users\\rahim\\OneDrive\\Masaüstü\\VeriProje\\BYSProje\\BYSProje.csproj",
+        "projectPath": "c:\\Users\\rahim\\OneDrive\\Masaüstü\\VeriProje\\BYSProje\\BYSProje.csproj",
         "packagesPath": "C:\\Users\\rahim\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rahim\\OneDrive\\Masaüstü\\VeriProje\\BYSProje\\obj\\",
+        "outputPath": "c:\\Users\\rahim\\OneDrive\\Masaüstü\\VeriProje\\BYSProje\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

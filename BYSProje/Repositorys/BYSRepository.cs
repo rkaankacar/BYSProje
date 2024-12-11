@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BYSProje.DBContext.Entity;
+using BYSProje.Models;
 using Microsoft.EntityFrameworkCore;
 namespace BYSProje.Repositorys
 {
@@ -51,5 +52,30 @@ namespace BYSProje.Repositorys
              await _context.SaveChangesAsync();
 
         }
+         
+         public async Task<T> GetByConditionAsync(int userNo, string password)
+    {
+             //typeof veri türüü almamızı sağlar
+         //   tür Students 
+    if (typeof(T) == typeof(Students))
+    {
+        return await _dbSet
+            .Where(e => EF.Property<int>(e, "StudentID") == userNo && EF.Property<string>(e, "Password") == password)
+            .SingleOrDefaultAsync();
+    }
+
+    //  tür Instructors 
+    if (typeof(T) == typeof(Instructors))
+    {
+        return await _dbSet
+            .Where(e => EF.Property<int>(e, "InstructorID") == userNo && EF.Property<string>(e, "Password") == password)
+            .SingleOrDefaultAsync();
+    }
+
+     return null;
+    }
+
+      
+    
     }
 }
