@@ -1,3 +1,7 @@
+@{
+  Layout="_AkademisyenSayfa";
+}
+
 <!DOCTYPE html>
 <html lang="tr">
 
@@ -45,65 +49,8 @@
     </div>
 
     <script>
-        const studentData = {
-            CS101: [
-                { no: "12345", name: "Ahmet Yılmaz" },
-                { no: "67890", name: "Ayşe Demir" },
-                { no: "11223", name: "Fatma Özkan" }
-            ],
-            BIO202: [
-                { no: "22334", name: "Emre Can" },
-                { no: "55667", name: "Selin Kara" }
-            ],
-            CS202: [
-                { no: "33445", name: "Mehmet Karaca" },
-                { no: "77889", name: "Zeynep İsmail" }
-            ]
-        };
-
-        function showStudents() {
-            const selectedCourse = document.getElementById('ders').value;
-            const studentTable = document.getElementById('students-table');
-            const studentList = document.getElementById('student-list');
+      
             
-            // Boşalt önceki öğrenci listelerini
-            studentList.innerHTML = '';
-
-            if (selectedCourse) {
-                // Seçilen dersin öğrencilerini al
-                const students = studentData[selectedCourse] || [];
-                
-                // Öğrencileri tabloya ekle
-                students.forEach(student => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${student.no}</td>
-                        <td>${student.name}</td>
-                        <td><input type="checkbox" name="students" value="${student.no}"></td>
-                    `;
-                    studentList.appendChild(row);
-                });
-
-                studentTable.style.display = 'block';
-            } else {
-                studentTable.style.display = 'none';
-            }
-        }
-
-        function saveAssignment() {
-            const selectedStudents = [];
-            const checkboxes = document.querySelectorAll('input[name="students"]:checked');
-
-            checkboxes.forEach(checkbox => {
-                selectedStudents.push(checkbox.value);
-            });
-
-            if (selectedStudents.length > 0) {
-                alert('Ders başarıyla atandı: ' + selectedStudents.join(', '));
-            } else {
-                alert('Lütfen atamak istediğiniz öğrencileri seçin.');
-            }
-        }
     </script>
 </body>
 

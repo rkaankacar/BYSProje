@@ -75,7 +75,18 @@ namespace BYSProje.Repositorys
      return null;
     }
 
-      
-    
+          
+
+              public async Task<List<Student_Courses>> GetCoursesByStudentIdAsync(int studentId)
+              {
+              return await _context.Student_Courses
+             .Where(sc => sc.StudentID == studentId)
+            .Include(sc => sc.Course)  // İlişkili Course tablosunu dahil et
+             .ToListAsync();
+              }
+
+
+
+
     }
 }

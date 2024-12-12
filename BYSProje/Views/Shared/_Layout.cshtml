@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 
@@ -53,15 +54,16 @@
         <div class="navbar-header">
             Öğrenci-Akademisyen Yönetim Sistemi
         </div>
-        <a href="ders-secimi.html">Ders Seçimi</a>
-        <a href="profil-guncelleme.html">Profil Güncelleme</a>
-        <a href="dersleri-goruntuleme.html">Dersleri Görüntüleme</a>
-        <a href="/logout" class="mt-auto text-center">Çıkış Yap</a>
+        <a asp-controller="Student"asp-action="DersSecimi"asp-route-id="@ViewData["StudentID"]">Ders Seçimi</a>
+        <a asp-controller="Student" asp-action="ProfilGuncelle" asp-route-id="@ViewData["StudentID"]">Profil Güncelleme</a>
+        <a asp-controller="Student" asp-action="DersGoruntule"asp-route-id="@ViewData["StudentID"]">Dersleri Görüntüleme</a>
+        <a asp-controller="Home"asp-action="Index" class="mt-auto text-center">Çıkış Yap</a>
     </nav>
 
     <!-- İçerik -->
     <div class="content">
         <!-- Dinamik içerik buraya gelecek -->
+            
         @RenderBody()
     </div>
 

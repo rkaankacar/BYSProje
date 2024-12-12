@@ -27,17 +27,11 @@ public class HomeController : Controller
          if (formID == 1) // Öğrenci için işlem
     {
         var student = await _studentService.GetByConditionAsync(login.UserNo, login.Password);
-        if (student != null)
-        {
-            var studentViewModel = new StudentsViewModel
-            {
-                StudentID = student.StudentID.ToString(),
-                First_Name = student.First_Name,
-                Last_Name = student.Last_Name,
-                Email = student.Email,
-                Major = student.Major
-            };
-            return View("~/Views/Student/OgrenciSayfasi.cshtml", studentViewModel);
+          if (student != null)
+        {     
+            
+            
+            return RedirectToAction("OgrenciSayfasi", "Student",new { id = student.StudentID });
         }
         else
         {
@@ -50,15 +44,15 @@ public class HomeController : Controller
 
         if (instructor != null)
         {
-            var instructorViewModel = new InstructorsViewModel
+            var routeValues = new RouteValueDictionary(new
             {
-                  InstructorID = instructor.InstructorID.ToString(),
-                    FirstName = instructor.FirstName,
-                    LastName = instructor.LastName,
-                    Email = instructor.Email,
-                    Department = instructor.Department
-            };
-            return View("~/Views/Instructor/AkademisyenSayfasi.cshtml", instructorViewModel);
+                instructorID = instructor.InstructorID,
+                firstName = instructor.FirstName,
+                lastName = instructor.LastName,
+                email = instructor.Email,
+                department = instructor.Department
+            });
+            return RedirectToAction("AkademisyenSayfasi", "Instructor", routeValues);
         }
         else
         {
@@ -70,7 +64,7 @@ public class HomeController : Controller
 }
     
 
-
+   
      public IActionResult Error()
 {
     var requestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;

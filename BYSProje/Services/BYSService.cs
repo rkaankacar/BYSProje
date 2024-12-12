@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BYSProje.Models;
 using BYSProje.Repositorys;
 namespace BYSProje.Services
 {
@@ -45,9 +46,48 @@ namespace BYSProje.Services
         }
 
            public async Task<T> GetByConditionAsync(int userNo, string password)
-      {
-        return await _repository.GetByConditionAsync(userNo, password);
+        {
+            return await _repository.GetByConditionAsync(userNo, password);
         }
+
+
+
+
+
+
+
+          public async Task<List<CourseViewModel>> GetCoursesByStudentIdAsync(int studentId)
+           {
+    
+                var studentCourses = await _repository.GetCoursesByStudentIdAsync(studentId);
+
+                if (studentCourses == null || !studentCourses.Any())
+                {
+                   return null;
+                }
+
+    
+                 return studentCourses.Select(sc => new CourseViewModel
+                  {
+                    CourseName = sc.Course.CourseName,
+                     Credits = sc.Course.Credits,
+                        CourseID = sc.Course.CourseID
+                   }).ToList();
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
         
    

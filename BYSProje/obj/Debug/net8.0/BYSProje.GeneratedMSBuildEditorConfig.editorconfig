@@ -54,8 +54,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxEZXJzRGV0YXkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/rahim/OneDrive/Masaüstü/VeriProje/BYSProje/Views/Student/DersleriGoruntule.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxEZXJzbGVyaUdvcnVudHVsZS5jc2h0bWw=
+[c:/Users/rahim/OneDrive/Masaüstü/VeriProje/BYSProje/Views/Student/DersGoruntule.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxEZXJzR29ydW50dWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [c:/Users/rahim/OneDrive/Masaüstü/VeriProje/BYSProje/Views/Student/DersSecimi.cshtml]
@@ -66,8 +66,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxPZ3JlbmNpU2F5ZmFzaS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/rahim/OneDrive/Masaüstü/VeriProje/BYSProje/Views/Student/ProfilGuncelleme.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxQcm9maWxHdW5jZWxsZW1lLmNzaHRtbA==
+[c:/Users/rahim/OneDrive/Masaüstü/VeriProje/BYSProje/Views/Student/ProfilGuncelle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxQcm9maWxHdW5jZWxsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [c:/Users/rahim/OneDrive/Masaüstü/VeriProje/BYSProje/Views/_ViewImports.cshtml]
