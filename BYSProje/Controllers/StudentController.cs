@@ -56,7 +56,7 @@ namespace BYSProje.Controllers
 
 
 
-             [HttpGet("Student/ProfilGuncelle/{id}")]
+             [HttpGet("ProfilGuncelle/{id}")]
 public async Task<IActionResult> ProfilGuncelle(int id)
 {
     try
@@ -96,7 +96,7 @@ public async Task<IActionResult> ProfilGuncelle(int id)
     }
 }
 
-[HttpPost("Student/ProfilGuncelle/{id}")]
+[HttpPost("ProfilGuncelle/{id}")]
 public async Task<IActionResult> ProfilGuncelle(int id, StudentsViewModel model)
 {      ModelState.Clear();
 
@@ -153,29 +153,6 @@ public async Task<IActionResult> ProfilGuncelle(int id, StudentsViewModel model)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         [HttpGet("DersSecimi")]
         public IActionResult DersSecimi()
         {
@@ -189,37 +166,32 @@ public async Task<IActionResult> ProfilGuncelle(int id, StudentsViewModel model)
         }
         
              
-             [HttpGet("DersGoruntule/{studentId}")]
+          [HttpGet("DersGoruntule/{studentId}")]
 public async Task<IActionResult> DersGoruntule(int studentId)
 {
-    // Servisten öğrenciye ait dersleri al
+   // Öğrenciye ait dersler alınıyor
     var studentCourses = await _studentCoursesService.GetCoursesByStudentIdAsync(studentId);
 
     if (studentCourses == null || !studentCourses.Any())
     {
-        return NotFound();
+        return NotFound(); // Öğrenciye ait ders bulunamadıysa 404 döndür
     }
-        
-     
-    return View(studentCourses); 
+
+    // ViewModel oluşturuluyor
+    var viewModel = new StudentCoursesViewModel
+    {     StudentID = studentId,
+        Courses = studentCourses.Select(course => new CourseViewModel
+        {  
+            CourseID = course.CourseID,
+            CourseName = course.CourseName,
+            Credits = course.Credits,
+            // Diğer gerekli özellikleri buraya ekleyebilirsiniz
+        }).ToList()
+    };
+
+    return View(viewModel);
 }
             
-
-
-        
-        [HttpGet("DersDetay")]
-        public IActionResult DersDetay()
-        {
-            return View();
-        }
-
-
-
-
-
-
-
-
 
 
 

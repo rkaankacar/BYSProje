@@ -17,9 +17,11 @@ namespace BYSProje.Models
     [EmailAddress(ErrorMessage = "Geçerli bir e-posta adresi girin.")]
         public string Email {get; set;}
         public string Major {get; set;}
+
          [Required(ErrorMessage = "Şifre boş olamaz.")]
-    [StringLength(100, MinimumLength = 6, ErrorMessage = "Şifre en az 6 karakter olmalıdır.")]
+         [StringLength(100, MinimumLength = 6, ErrorMessage = "Şifre en az 6 karakter olmalıdır.")]
         public string Password {get; set;}
-      
+
+       
     }
 }

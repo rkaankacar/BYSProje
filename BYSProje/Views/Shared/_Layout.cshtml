@@ -1,4 +1,3 @@
-@model StudentsViewModel
 <!DOCTYPE html>
 <html lang="tr">
 
@@ -54,16 +53,16 @@
         <div class="navbar-header">
             Öğrenci-Akademisyen Yönetim Sistemi
         </div>
-        <a asp-controller="Student" asp-action="DersSecimi"asp-route-id="@Model.StudentID">Ders Seçimi</a>
+        <a asp-controller="Student" asp-action="DersSecimi">Ders Seçimi</a>
         <a asp-controller="Student" asp-action="ProfilGuncelle" asp-route-id="@Model.StudentID">Profil Güncelleme</a>
-        <a asp-controller="Student" asp-action="DersGoruntule"asp-route-id="@Model.StudentID">Dersleri Görüntüleme</a>
-        <a asp-controller="Home"asp-action="Index" class="mt-auto text-center">Çıkış Yap</a>
+          <input type="hidden" name="id" value="@Model.StudentID" />
+        <a asp-controller="Student" asp-action="DersGoruntule" asp-route-id="@Model.StudentID">Dersleri Görüntüleme</a>
+          <input type="hidden" name="id" value="@Model.StudentID" />
+        <a asp-controller="Home" asp-action="Index" class="mt-auto text-center">Çıkış Yap</a>
     </nav>
 
     <!-- İçerik -->
     <div class="content">
-        <!-- Dinamik içerik buraya gelecek -->
-            
         @RenderBody()
     </div>
 
