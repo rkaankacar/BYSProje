@@ -15,21 +15,17 @@
 <body>
     <div class="content">
         <h2>Profil Güncelleme</h2>
-        <form>
-            <div class="mb-3">
-                <label for="ad" class="form-label">Ad:</label>
-                <input type="text" class="form-control" id="ad" placeholder="Adınızı girin">
-            </div>
-            <div class="mb-3">
-                <label for="soyad" class="form-label">Soyad:</label>
-                <input type="text" class="form-control" id="soyad" placeholder="Soyadınızı girin">
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email:</label>
-                <input type="email" class="form-control" id="email" placeholder="Email adresinizi girin">
-            </div>
-            <button type="submit" class="btn btn-danger">Güncelle</button>
-        </form>
+ <form method="post" asp-action="ProfilGuncelle" asp-route-id="@Model.StudentID">
+    <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" class="form-control" id="email" name="Email" value="@Model.Email" placeholder="Email adresinizi girin">
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Şifre:</label>
+        <input type="password" class="form-control" id="password" name="Password" value="@Model.Password" placeholder="Yeni şifrenizi girin">
+    </div>
+    <button type="submit" class="btn btn-danger">Güncelle</button>
+</form>
     </div>
 </body>
 

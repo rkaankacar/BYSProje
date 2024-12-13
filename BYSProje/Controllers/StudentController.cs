@@ -26,7 +26,7 @@ namespace BYSProje.Controllers
           _studentCoursesService = studentCoursesService;
      }
         
-         [HttpGet("OgrenciSayfasi/{id}")]
+         [HttpGet("OgrenciSayfasi")]
         public async Task<IActionResult> OgrenciSayfasi(int id)
         {       
                var student = await _studentService.GetByIDAsync(id);
@@ -39,69 +39,140 @@ namespace BYSProje.Controllers
                      Email = student.Email,
                      Major = student.Major
                     };
-                      ViewData["StudentID"] = id;
+                     
                      return View(model);
         }
 
-        [HttpGet("ProfilGuncelle/{id}")]
-        public async Task<IActionResult> ProfilGuncelle(int id)
+       
+
+
+
+
+
+
+
+
+
+
+
+
+             [HttpGet("Student/ProfilGuncelle/{id}")]
+public async Task<IActionResult> ProfilGuncelle(int id)
+{
+    try
+    {
+        // ID'nin doğru şekilde alındığını kontrol ediyoruz.
+        if (id <= 0)
         {
-            
-            var student = await _studentService.GetByIDAsync(id);
+            Console.WriteLine($"Invalid ID received: {id}");
+            return BadRequest("Geçersiz ID.");
+        }
 
-            if (student == null)
-            {
-                return NotFound();
-            }
+        // Veritabanından öğrenci bilgisi alınıyor.
+        var student = await _studentService.GetByIDAsync(id);
+        if (student == null)
+        {
+            Console.WriteLine($"Student not found with ID: {id}");
+            return NotFound("Öğrenci bulunamadı.");
+        }
 
-           
-            var model = new StudentsViewModel
-            {
-                StudentID = student.StudentID,
-                Email = student.Email,
-                Major = student.Major
-               
-            };
+        // Öğrenci bilgisi modele aktarılıyor.
+        var model = new StudentsViewModel
+        {
+            StudentID = student.StudentID,
+            First_Name = student.First_Name,
+            Last_Name = student.Last_Name,
+            Email = student.Email,
+            Major = student.Major,
+            Password = student.Password
+        };
 
-            
+        return View(model);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error in GET ProfilGuncelle: {ex.Message}");
+        return StatusCode(500, "Sunucu hatası. Lütfen tekrar deneyin.");
+    }
+}
+
+[HttpPost("Student/ProfilGuncelle/{id}")]
+public async Task<IActionResult> ProfilGuncelle(int id, StudentsViewModel model)
+{      ModelState.Clear();
+
+    try
+    {
+        // Model doğrulama
+        if (!ModelState.IsValid)
+        {
+            Console.WriteLine("Model validation failed.");
             return View(model);
         }
 
-        
-        [HttpPost("ProfilGuncelle/{id}")]
-        public async Task<IActionResult> ProfilGuncelle(int id, StudentsViewModel model)
+        // ID'nin doğru şekilde alındığını kontrol ediyoruz.
+        if (id <= 0)
         {
-            
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            var student = await _studentService.GetByIDAsync(id);
-
-            if (student == null)
-            {
-                return NotFound();
-            }
-            student.First_Name = model.First_Name;
-            student.Last_Name = model.Last_Name;
-            student.Email = model.Email;
-            student.Password = model.Password;
-            
-            await _studentService.UpdateAsync(student);
-
-            
-            var updatedModel = new StudentsViewModel
-            {
-                StudentID = student.StudentID,
-                Email = student.Email,
-                Major = student.Major
-            };
-
-         
-            TempData["SuccessMessage"] = "Profil başarıyla güncellendi!";
-            return RedirectToAction("ProfilGuncelle", new { id = student.StudentID });
+            Console.WriteLine($"Invalid ID received: {id}");
+            return BadRequest("Geçersiz ID.");
         }
+
+        // Veritabanından öğrenci bilgisi alınıyor.
+        var student = await _studentService.GetByIDAsync(id);
+        if (student == null)
+        {
+            Console.WriteLine($"Student not found with ID: {id}");
+            return NotFound("Öğrenci bulunamadı.");
+        }
+
+        // Modelden gelen veriler öğrenci nesnesine aktarılıyor.
+        if (string.IsNullOrWhiteSpace(model.Email) || string.IsNullOrWhiteSpace(model.Password))
+        {
+            Console.WriteLine("Email or Password is empty.");
+            ModelState.AddModelError("", "E-posta ve şifre boş olamaz.");
+            return View(model);
+        }
+
+        student.Email = model.Email;
+        student.Password = model.Password;
+
+        // Veritabanında güncelleme işlemi
+        await _studentService.UpdateAsync(student);
+        Console.WriteLine($"Student updated successfully: {student.StudentID}");
+
+        // Başarı mesajı ve yönlendirme
+        TempData["SuccessMessage"] = "Profil başarıyla güncellendi!";
+        return RedirectToAction("ProfilGuncelle", new { id = student.StudentID });
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error in POST ProfilGuncelle: {ex.Message}");
+        ModelState.AddModelError("", "Bir hata oluştu. Lütfen tekrar deneyin.");
+        return View(model);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -118,7 +189,7 @@ namespace BYSProje.Controllers
         }
         
              
-             [HttpGet("DersGoruntule/{studentid}")]
+             [HttpGet("DersGoruntule/{studentId}")]
 public async Task<IActionResult> DersGoruntule(int studentId)
 {
     // Servisten öğrenciye ait dersleri al
@@ -128,7 +199,7 @@ public async Task<IActionResult> DersGoruntule(int studentId)
     {
         return NotFound();
     }
-        ViewData["StudentID"] = studentId;
+        
      
     return View(studentCourses); 
 }
