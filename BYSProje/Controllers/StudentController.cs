@@ -175,10 +175,34 @@ namespace BYSProje.Controllers
         }
 
         [HttpPost("DersSecim/{id}")]
-        public async Task<IActionResult> lessonSelect()
+        public async Task<IActionResult> DersSecim(int id, DersSecimiViewModel model)
+       {
+   
+         var allCourses = await _coursesService.GetAllCoursesAsync();
+
+    
+          if (model.CourseIDs == null || !model.CourseIDs.Any())
+         {
+            ModelState.AddModelError("", "Lütfen en az bir ders seçin.");
+            return View(model); 
+         }
+
+          foreach (var courseId in model.CourseIDs)
         {
-            return View();
+             var course = allCourses.FirstOrDefault(c => c.CourseID == courseId);
+           
+              var studentCourse = new Student_Courses
+             {
+                StudentID = model.StudentID,
+                CourseID = course.CourseID
+             };
+
+             await _studentCoursesService.AddAsync(studentCourse);
         }
+
+    TempData["SuccessMessage"] = "Ders başarıyla seçildi!";
+    return RedirectToAction("DersSecim", new { id = model.StudentID });
+}
         
         [HttpGet("DersGoruntule/{studentId}")]
         public async Task<IActionResult> DersGoruntule(int studentId)

@@ -13,7 +13,7 @@
         <h2>Ders Seçimi</h2>
         
         <form method="post" asp-controller="Student" asp-action="DersSecim">
-            <input type="hidden" name="studentID" value="@Model.StudentID" />
+            <input type="hidden" name="StudentID" value="@Model.StudentID" />
 
             <h4>Dersler:</h4>
             <table class="table">
@@ -27,28 +27,26 @@
                 </thead>
                 <tbody>
                     @foreach (var course in Model.SCourses)
-                    {
-                        @if (course != null)  
-                        {
-                            <tr>
-                                <td>@course.CourseName</td>
-                                <td>@course.CourseID</td>
-                                <td>
-                                    @if (course.Instructor != null)
-                                    {
-                                        @course.Instructor.FirstName @course.Instructor.LastName
-                                    }
-                                    else
-                                    {
-                                        <span>Akademisyen Bilgisi Yok</span>
-                                    }
-                                </td>
-                                <td>
-                                    <input type="checkbox" name="courseIds" value="@course.CourseID" />
-                                </td>
-                            </tr>
-                        }
-                    }
+{
+                       <tr>
+         <td>@course.CourseName</td>
+        <td>@course.CourseID</td>
+        <td>
+            @if (course.Instructor != null)
+            {
+                @course.Instructor.FirstName @course.Instructor.LastName
+            }
+            else
+            {
+                <span>Akademisyen Bilgisi Yok</span>
+            }
+        </td>
+        <td>
+            <input type="checkbox" name="CourseIDs" value="@course.CourseID" />
+        </td>
+    </tr>
+}
+
                 </tbody>
             </table>
 
