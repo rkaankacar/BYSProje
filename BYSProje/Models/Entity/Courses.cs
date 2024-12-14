@@ -13,6 +13,7 @@ namespace BYSProje.Models
         public string CourseName {get; set;}
         public float Credits {get; set;}
         public int InstructorID {get; set;}
+        public string Explanation {get; set;}
         public Instructors? Instructor { get; set; } // navigasyon ilişkiyi belirtir.
         
         public ICollection<Student_Courses> StudentCourse {get; set;}

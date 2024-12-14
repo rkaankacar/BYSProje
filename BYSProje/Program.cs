@@ -8,13 +8,18 @@ var builder = WebApplication.CreateBuilder(args);
 
  builder.Services.AddDbContext<BYSContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddScoped<IBYSRepository<Students>, BYSRepository<Students>>();
 builder.Services.AddScoped<IBYSService<Students>, BYSService<Students>>();
+
 builder.Services.AddScoped<IBYSRepository<Instructors>, BYSRepository<Instructors>>();
 builder.Services.AddScoped<IBYSService<Instructors>, BYSService<Instructors>>();
+
 builder.Services.AddScoped<IBYSService<Student_Courses>, BYSService<Student_Courses>>();
 builder.Services.AddScoped<IBYSRepository<Student_Courses>, BYSRepository<Student_Courses>>();
 
+builder.Services.AddScoped<IBYSRepository<Courses>, BYSRepository<Courses>>();
+builder.Services.AddScoped<IBYSService<Courses>, BYSService<Courses>>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

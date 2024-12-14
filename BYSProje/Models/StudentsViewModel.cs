@@ -14,7 +14,7 @@ namespace BYSProje.Models
         [Required(ErrorMessage = "Soyad boş olamaz.")]
         public string Last_Name {get; set;}
          [Required(ErrorMessage = "E-posta boş olamaz.")]
-    [EmailAddress(ErrorMessage = "Geçerli bir e-posta adresi girin.")]
+        [EmailAddress(ErrorMessage = "Geçerli bir e-posta adresi girin.")]
         public string Email {get; set;}
         public string Major {get; set;}
 

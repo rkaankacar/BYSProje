@@ -40,6 +40,7 @@ namespace BYSProje.DBContext.Entity;
             entity.Property(e => e.CourseName).HasMaxLength(100);
             entity.Property(e =>e.Credits).HasColumnType("float");
             entity.Property(e => e.InstructorID).HasColumnName("InstructorID");
+            entity.Property(e =>e.Explanation).HasMaxLength(100);
             
             entity.HasOne(d => d.Instructor)
             .WithMany(p => p.Courses)

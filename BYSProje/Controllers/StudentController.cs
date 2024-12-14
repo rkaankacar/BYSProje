@@ -10,6 +10,7 @@ using BYSProje.Services;
 using BYSProje.DBContext;
 using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Security.Claims;
 namespace BYSProje.Controllers
 {
     [Route("[controller]")]
@@ -18,15 +19,19 @@ namespace BYSProje.Controllers
     private readonly ILogger<StudentController> _logger;
     private readonly IBYSService<Students> _studentService;
     private readonly IBYSService<Student_Courses> _studentCoursesService;
+    private readonly IBYSService<Courses> _coursesService;
+     private readonly IBYSService<Instructors> _instructorService;
     
-    public StudentController(IBYSService<Students> studentService,ILogger<StudentController> logger,IBYSService<Student_Courses> studentCoursesService)
+    public StudentController(IBYSService<Students> studentService,ILogger<StudentController> logger,IBYSService<Student_Courses> studentCoursesService, IBYSService<Courses> coursesService,IBYSService<Instructors> instructorService)
      {
          _studentService = studentService;
           _logger = logger;
           _studentCoursesService = studentCoursesService;
+          _coursesService = coursesService;
+          _instructorService = instructorService;
      }
         
-         [HttpGet("OgrenciSayfasi")]
+        [HttpGet("OgrenciSayfasi")]
         public async Task<IActionResult> OgrenciSayfasi(int id)
         {       
                var student = await _studentService.GetByIDAsync(id);
@@ -43,21 +48,8 @@ namespace BYSProje.Controllers
                      return View(model);
         }
 
-       
-
-
-
-
-
-
-
-
-
-
-
-
-             [HttpGet("ProfilGuncelle/{id}")]
-public async Task<IActionResult> ProfilGuncelle(int id)
+        [HttpGet("ProfilGuncelle/{id}")]
+        public async Task<IActionResult> ProfilGuncelle(int id)
 {
     try
     {
@@ -96,8 +88,8 @@ public async Task<IActionResult> ProfilGuncelle(int id)
     }
 }
 
-[HttpPost("ProfilGuncelle/{id}")]
-public async Task<IActionResult> ProfilGuncelle(int id, StudentsViewModel model)
+        [HttpPost("ProfilGuncelle/{id}")]
+        public async Task<IActionResult> ProfilGuncelle(int id, StudentsViewModel model)
 {      ModelState.Clear();
 
     try
@@ -152,7 +144,6 @@ public async Task<IActionResult> ProfilGuncelle(int id, StudentsViewModel model)
 }
 
 
-
         [HttpGet("DersSecimi")]
         public IActionResult DersSecimi()
         {
@@ -165,33 +156,87 @@ public async Task<IActionResult> ProfilGuncelle(int id, StudentsViewModel model)
             return View();
         }
         
-             
           [HttpGet("DersGoruntule/{studentId}")]
 public async Task<IActionResult> DersGoruntule(int studentId)
 {
-   // Öğrenciye ait dersler alınıyor
+    // Öğrencinin derslerini al
     var studentCourses = await _studentCoursesService.GetCoursesByStudentIdAsync(studentId);
 
     if (studentCourses == null || !studentCourses.Any())
     {
-        return NotFound(); // Öğrenciye ait ders bulunamadıysa 404 döndür
+        return NotFound(); // Öğrenciye ait ders bulunamazsa 404 döndür
     }
 
-    // ViewModel oluşturuluyor
+    // Veriyi model ile view'a aktarma
     var viewModel = new StudentCoursesViewModel
-    {     StudentID = studentId,
+    {
+        StudentID = studentId,
         Courses = studentCourses.Select(course => new CourseViewModel
         {  
             CourseID = course.CourseID,
             CourseName = course.CourseName,
             Credits = course.Credits,
-            // Diğer gerekli özellikleri buraya ekleyebilirsiniz
         }).ToList()
     };
 
     return View(viewModel);
 }
             
+        
+      
+   
+           
+
+
+
+
+
+   [HttpGet("DersDetay/{courseId}")]
+    public async Task<IActionResult> DersDetay(int courseId)
+    {
+        // Kursu ve ilişkili bilgileri alıyoruz
+        var course = await _coursesService.GetByIDAsync(courseId);
+
+        if (course == null)
+        {
+            return NotFound(); // Kurs bulunamazsa 404 döndür
+        }
+
+        // Instructor bilgilerini alıyoruz
+        var instructor = await _instructorService.GetByIDAsync(course.InstructorID);
+
+        // Öğrenci ders bilgilerini alıyoruz
+        var studentCourses = await _studentCoursesService.GetAllAsync();
+
+        // ViewModel'e dönüştürüyoruz
+        var courseViewModel = new CourseViewModel
+        {
+            CourseID = course.CourseID,
+            CourseName = course.CourseName,
+            Credits = course.Credits,
+            InstructorID = course.InstructorID,
+            FirstName = instructor?.FirstName,  // Instructor FirstName alınıyor
+            LastName = instructor?.LastName,   // Instructor LastName alınıyor
+            Explanation = course.Explanation,
+            StudentCourse = studentCourses.Where(sc => sc.CourseID == courseId).ToList(),
+            StudentID = studentCourses.FirstOrDefault()?.StudentID ?? 0 // İlk öğrenci id'sini alıyoruz
+        };
+
+        return View(courseViewModel);
+    }
+     
+    
+
+
+
+
+
+
+
+
+
+
+
 
 
 

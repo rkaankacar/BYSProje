@@ -56,7 +56,7 @@
         <a asp-controller="Student" asp-action="DersSecimi">Ders Seçimi</a>
         <a asp-controller="Student" asp-action="ProfilGuncelle" asp-route-id="@Model.StudentID">Profil Güncelleme</a>
           <input type="hidden" name="id" value="@Model.StudentID" />
-        <a asp-controller="Student" asp-action="DersGoruntule" asp-route-id="@Model.StudentID">Dersleri Görüntüleme</a>
+    <a asp-controller="Student" asp-action="DersGoruntule" asp-route-studentId="@Model.StudentID">Dersleri Görüntüleme</a>
           <input type="hidden" name="id" value="@Model.StudentID" />
         <a asp-controller="Home" asp-action="Index" class="mt-auto text-center">Çıkış Yap</a>
     </nav>

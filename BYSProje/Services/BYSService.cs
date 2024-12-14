@@ -70,8 +70,9 @@ namespace BYSProje.Services
                  return studentCourses.Select(sc => new CourseViewModel
                   {
                     CourseName = sc.Course.CourseName,
-                     Credits = sc.Course.Credits,
-                        CourseID = sc.Course.CourseID
+                    Credits = sc.Course.Credits,
+                    CourseID = sc.Course.CourseID,
+                 
                    }).ToList();
             }
 
