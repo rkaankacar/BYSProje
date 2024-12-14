@@ -10,5 +10,7 @@ namespace BYSProje.Models
         public int StudentID {get; set;}
        
         public List<CourseViewModel> Courses { get; set; }
+
+       
     }
 }

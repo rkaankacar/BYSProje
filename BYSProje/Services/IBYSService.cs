@@ -16,5 +16,6 @@ namespace BYSProje.Services
           Task DeleteAsync(int id);
           Task<T> GetByConditionAsync(int userNo, string password);
           Task<List<CourseViewModel>> GetCoursesByStudentIdAsync(int studentId);
+          Task<List<Courses>> GetAllCoursesAsync();
     }
 }

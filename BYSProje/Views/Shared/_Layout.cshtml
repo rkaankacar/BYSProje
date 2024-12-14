@@ -53,7 +53,7 @@
         <div class="navbar-header">
             Öğrenci-Akademisyen Yönetim Sistemi
         </div>
-        <a asp-controller="Student" asp-action="DersSecimi">Ders Seçimi</a>
+        <a asp-controller="Student" asp-action="DersSecim" asp-route-id="@Model.StudentID">Ders Seçimi</a>
         <a asp-controller="Student" asp-action="ProfilGuncelle" asp-route-id="@Model.StudentID">Profil Güncelleme</a>
           <input type="hidden" name="id" value="@Model.StudentID" />
     <a asp-controller="Student" asp-action="DersGoruntule" asp-route-studentId="@Model.StudentID">Dersleri Görüntüleme</a>

@@ -85,7 +85,12 @@ namespace BYSProje.Repositorys
                   .ToListAsync();
               }
 
-
+                   public async Task<List<Courses>> GetAllCoursesAsync()
+               {
+                   return await _context.Courses
+                  .Include(c => c.Instructor)  // Instructor'ı dahil et
+                 .ToListAsync();
+               }
 
 
     }

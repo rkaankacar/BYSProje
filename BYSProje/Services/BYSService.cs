@@ -76,6 +76,15 @@ namespace BYSProje.Services
                    }).ToList();
             }
 
+               public async Task<List<Courses>> GetAllCoursesAsync()
+               {
+                 return await _repository.GetAllCoursesAsync();
+               }
+
+
+
+          
+
 
 
 

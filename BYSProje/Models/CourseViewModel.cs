@@ -8,7 +8,7 @@ namespace BYSProje.Models
 {
     public class CourseViewModel
     {   
-        public int CourseID { get; set; }
+    public int CourseID { get; set; }
     public string CourseName { get; set; }
     public float Credits { get; set; }
     public int InstructorID { get; set; }
@@ -17,6 +17,6 @@ namespace BYSProje.Models
     public string InstructorName => $"{FirstName} {LastName}"; // İsim + Soyisim birleşimi
     public string Explanation { get; set; }
     public ICollection<Student_Courses> StudentCourse { get; set; }
-    public int StudentID { get; set; } // Öğrenci ID
+     public int StudentID {get;set;}//ogrencidi vardı.
     }
 }

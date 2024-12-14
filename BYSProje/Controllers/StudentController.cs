@@ -143,21 +143,45 @@ namespace BYSProje.Controllers
     }
 }
 
+        [HttpGet("DersSecim/{id}")]
+        public async Task<IActionResult> DersSecim(int id)
+        {   
+         
+          var student = await _studentService.GetByIDAsync(id); // Öğrenci bilgisi kontrolü
+          if (student == null)
+          {
+            return NotFound("Öğrenci bulunamadı.");
+          }
 
-        [HttpGet("DersSecimi")]
-        public IActionResult DersSecimi()
-        {
-            return View();
+          var selectedCourses = await _studentCoursesService.GetCoursesByStudentIdAsync(id);
+        var allCourses = await _coursesService.GetAllCoursesAsync();
+          
+          var SCourses = allCourses
+         .Where(c => !selectedCourses.Any(sc => sc.CourseID == c.CourseID))
+         .Select(c => new Courses
+         {
+            CourseID = c.CourseID,
+            CourseName = c.CourseName,
+            Instructor = c.Instructor
+         })
+         .ToList();
+         var model = new DersSecimiViewModel
+          {
+           StudentID = student.StudentID,
+           SCourses = SCourses
+          };
+
+          return View(model);
         }
 
-        [HttpPost("DersSecimi")]
-        public IActionResult lessonSelect()
+        [HttpPost("DersSecim/{id}")]
+        public async Task<IActionResult> lessonSelect()
         {
             return View();
         }
         
-          [HttpGet("DersGoruntule/{studentId}")]
-public async Task<IActionResult> DersGoruntule(int studentId)
+        [HttpGet("DersGoruntule/{studentId}")]
+        public async Task<IActionResult> DersGoruntule(int studentId)
 {
     // Öğrencinin derslerini al
     var studentCourses = await _studentCoursesService.GetCoursesByStudentIdAsync(studentId);
@@ -182,17 +206,8 @@ public async Task<IActionResult> DersGoruntule(int studentId)
     return View(viewModel);
 }
             
-        
-      
-   
-           
-
-
-
-
-
-   [HttpGet("DersDetay/{courseId}")]
-    public async Task<IActionResult> DersDetay(int courseId)
+        [HttpGet("DersDetay/{courseId}")]
+        public async Task<IActionResult> DersDetay(int courseId)
     {
         // Kursu ve ilişkili bilgileri alıyoruz
         var course = await _coursesService.GetByIDAsync(courseId);
@@ -215,26 +230,17 @@ public async Task<IActionResult> DersGoruntule(int studentId)
             CourseName = course.CourseName,
             Credits = course.Credits,
             InstructorID = course.InstructorID,
-            FirstName = instructor?.FirstName,  // Instructor FirstName alınıyor
-            LastName = instructor?.LastName,   // Instructor LastName alınıyor
+            FirstName = instructor?.FirstName,  
+            LastName = instructor?.LastName,   
             Explanation = course.Explanation,
             StudentCourse = studentCourses.Where(sc => sc.CourseID == courseId).ToList(),
-            StudentID = studentCourses.FirstOrDefault()?.StudentID ?? 0 // İlk öğrenci id'sini alıyoruz
+            StudentID = studentCourses.FirstOrDefault()?.StudentID ?? 0 
         };
 
         return View(courseViewModel);
     }
      
     
-
-
-
-
-
-
-
-
-
 
 
 

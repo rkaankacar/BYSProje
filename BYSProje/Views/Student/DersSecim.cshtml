@@ -1,0 +1,60 @@
+@model DersSecimiViewModel  
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ders Seçimi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Ders Seçimi</h2>
+        
+        <form method="post" asp-controller="Student" asp-action="DersSecim">
+            <input type="hidden" name="studentID" value="@Model.StudentID" />
+
+            <h4>Dersler:</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Ders Adı</th>
+                        <th>Kodu</th>
+                        <th>Akademisyen</th>
+                        <th>Seç</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model.SCourses)
+                    {
+                        @if (course != null)  
+                        {
+                            <tr>
+                                <td>@course.CourseName</td>
+                                <td>@course.CourseID</td>
+                                <td>
+                                    @if (course.Instructor != null)
+                                    {
+                                        @course.Instructor.FirstName @course.Instructor.LastName
+                                    }
+                                    else
+                                    {
+                                        <span>Akademisyen Bilgisi Yok</span>
+                                    }
+                                </td>
+                                <td>
+                                    <input type="checkbox" name="courseIds" value="@course.CourseID" />
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+            <button type="submit" class="btn btn-success">Kaydet</button>
+        </form>
+        
+    </div>
+</body>
+</html>
