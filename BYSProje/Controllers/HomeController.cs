@@ -44,15 +44,8 @@ public class HomeController : Controller
 
         if (instructor != null)
         {
-            var routeValues = new RouteValueDictionary(new
-            {
-                instructorID = instructor.InstructorID,
-                firstName = instructor.FirstName,
-                lastName = instructor.LastName,
-                email = instructor.Email,
-                department = instructor.Department
-            });
-            return RedirectToAction("AkademisyenSayfasi", "Instructor", routeValues);
+           
+            return RedirectToAction("AkademisyenSayfasi", "Instructor", new { id = instructor.InstructorID } );
         }
         else
         {

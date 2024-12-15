@@ -154,7 +154,7 @@ namespace BYSProje.Controllers
           }
 
           var selectedCourses = await _studentCoursesService.GetCoursesByStudentIdAsync(id);
-        var allCourses = await _coursesService.GetAllCoursesAsync();
+          var allCourses = await _coursesService.GetAllCoursesAsync();
           
           var SCourses = allCourses
          .Where(c => !selectedCourses.Any(sc => sc.CourseID == c.CourseID))
