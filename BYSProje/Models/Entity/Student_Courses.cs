@@ -11,7 +11,8 @@ namespace BYSProje.Models
     {   [Key]
         public int StudentID {get; set;}
         public int CourseID {get; set;}
-
+         
+        public bool IsApproved { get; set; }
         public virtual Students? Student {get; set;}
         public virtual Courses? Course {get; set;} 
     }

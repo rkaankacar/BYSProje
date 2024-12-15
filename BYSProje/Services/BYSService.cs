@@ -72,6 +72,7 @@ namespace BYSProje.Services
                     CourseName = sc.Course.CourseName,
                     Credits = sc.Course.Credits,
                     CourseID = sc.Course.CourseID,
+                    InstructorID = sc.Course.InstructorID
                  
                    }).ToList();
             }
@@ -80,6 +81,19 @@ namespace BYSProje.Services
                {
                  return await _repository.GetAllCoursesAsync();
                }
+              
+
+                  public async Task ApproveCourseAsync(int studentId, int courseId)
+                {
+                   var studentCourse = await _repository.GetStudentCourseAsync(studentId, courseId);
+    
+                    if (studentCourse != null && !studentCourse.IsApproved)
+                   {
+                      studentCourse.IsApproved = true;
+                     await _repository.UpdateStudentCourseAsync(studentCourse); // UpdateStudentCourseAsync kullanarak sadece Student_Courses için güncelleme
+                   }
+                }
+          
 
     }
         

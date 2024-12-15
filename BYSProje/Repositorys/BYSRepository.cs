@@ -82,6 +82,7 @@ namespace BYSProje.Repositorys
                           return await _context.Student_Courses
                   .Where(sc => sc.StudentID == studentId)
                 .Include(sc => sc.Course)  // Course tablosunu dahil et
+                .ThenInclude(c => c.Instructor)
                   .ToListAsync();
               }
 
@@ -91,7 +92,28 @@ namespace BYSProje.Repositorys
                   .Include(c => c.Instructor)  // Instructor'ı dahil et
                  .ToListAsync();
                }
+            
 
+             public async Task AddAsync(Student_Courses entity)
+            {
+               await _context.Student_Courses.AddAsync(entity);
+               await _context.SaveChangesAsync();
+            }
+           
+
+
+
+            public async Task<Student_Courses> GetStudentCourseAsync(int studentId, int courseId)
+         {
+              return await _context.Student_Courses
+             .FirstOrDefaultAsync(sc => sc.StudentID == studentId && sc.CourseID == courseId);
+         }
+
+         public async Task UpdateStudentCourseAsync(Student_Courses studentCourse)
+        {
+            _context.Student_Courses.Update(studentCourse); // Student_Courses tablosu için güncelleme işlemi
+            await _context.SaveChangesAsync();
+        }
 
     }
 }

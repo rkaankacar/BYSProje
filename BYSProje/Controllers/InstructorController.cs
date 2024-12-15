@@ -16,11 +16,15 @@ namespace BYSProje.Controllers
         private readonly ILogger<InstructorController> _logger;
          private readonly IBYSService<Instructors> _instructorService;
           private readonly IBYSService<Courses> _courseService;
-        public InstructorController(ILogger<InstructorController> logger,IBYSService<Instructors> instructorService,IBYSService<Courses> courseService)
+          private readonly IBYSService<Student_Courses> _studentcourseService;
+         
+        public InstructorController(ILogger<InstructorController> logger,IBYSService<Instructors> instructorService,IBYSService<Courses> courseService, IBYSService<Student_Courses> studencourseService)
         {
             _logger = logger;
             _instructorService = instructorService;
             _courseService = courseService;
+            _studentcourseService = studencourseService;
+            
         }
         
         [HttpGet("AkademisyenSayfasi")]
@@ -68,19 +72,6 @@ namespace BYSProje.Controllers
              return RedirectToAction("ProfilGuncelleme", new {id = instructor.InstructorID});
         }
 
-        [HttpGet("DersAtama/{id}")]
-        public IActionResult DersAtama()
-        {
-            return View();
-        }
-
-        [HttpPost("DersAtama/{id}")]
-        public IActionResult lessonPost()
-
-        {
-           return View();
-        }
-        
         [HttpGet("DersEkleme/{id}")]
         public async Task<IActionResult> DersEkleme(int id)
         {  var instructor = await _instructorService.GetByIDAsync(id);
@@ -98,8 +89,8 @@ namespace BYSProje.Controllers
                     return View(course);
         }
 
-      [HttpPost("DersEkleme/{id}")]
-       public async Task<IActionResult> DersEkleme(int id, CourseViewModel model)
+        [HttpPost("DersEkleme/{id}")]
+        public async Task<IActionResult> DersEkleme(int id, CourseViewModel model)
 {
     
 
@@ -121,20 +112,14 @@ namespace BYSProje.Controllers
     return View(model);
 }
       
+        
+         
+   
+          
+    
+    
+  }
 
 
 
-
-
-
-
-
-
-         [HttpGet("error")]
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View("Error!");
-        }
-    }
 }

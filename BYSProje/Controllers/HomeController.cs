@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using BYSProje.Models;
 using BYSProje.Services;
+using System.Data.Common;
 namespace BYSProje.Controllers;
 
 public class HomeController : Controller
@@ -57,7 +58,37 @@ public class HomeController : Controller
 }
     
 
-   
+     [HttpGet("SifreSifirla")]
+     public IActionResult SifreSifirla()
+     {
+           return View("SifreSifirla");
+     }
+
+     [HttpPost("SifreSifirla")]
+     public async Task<IActionResult> SifreSifirla(int formID, Login login)
+     {     
+        if(formID == 1)
+        {
+              var student = await _studentService.GetByIDAsync(login.UserNo);
+              if(student.StudentID == login.UserNo)
+              {    
+                    student.Password = login.Password;
+                   await _studentService.UpdateAsync(student);
+                   RedirectToAction("Index");
+              }
+        }
+        else if(formID == 2)
+        {
+             var instructor = await _instructorService.GetByIDAsync(login.UserNo);
+             if(instructor.InstructorID==login.UserNo)
+             {
+                instructor.Password = login.Password;
+                await _instructorService.UpdateAsync(instructor);
+                RedirectToAction("Index");
+             }
+        }
+           return View(login);
+     }
      public IActionResult Error()
 {
     var requestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;

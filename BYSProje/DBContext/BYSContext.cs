@@ -92,6 +92,7 @@ namespace BYSProje.DBContext.Entity;
               entity.ToTable("Student_Courses");
               entity.Property(e => e.StudentID).HasColumnName("StudentID");
               entity.Property(e => e.CourseID).HasColumnName("CourseID");
+              entity.Property(e => e.IsApproved).HasColumnName("IsApproved").HasDefaultValue(false);
               
 
                entity.HasOne(d => d.Student)

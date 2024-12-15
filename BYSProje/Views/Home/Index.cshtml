@@ -65,7 +65,7 @@
                 <input asp-for="Password" class="form-control"  placeholder="Şifrenizi girin" required>
             </div>
             <div class="mb-3 text-end">
-                <a href="/sifre-sifirla" class="text-decoration-none">Şifreni mi unuttun?</a>
+                <a asp-controller="Home" asp-action="SifreSifirla" class="text-decoration-none">Şifreni mi unuttun?</a>
             </div>
             <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
         </form>
@@ -82,7 +82,7 @@
                 <input  asp-for="Password" class="form-control" placeholder="Şifrenizi girin" required>
             </div>
             <div class="mb-3 text-end">
-                <a href="/sifre-sifirla" class="text-decoration-none">Şifreni mi unuttun?</a>
+                <a asp-controller="Home" asp-action="SifreSifirla" class="text-decoration-none">Şifreni mi unuttun?</a>
             </div>
             <button type="submit" class="btn btn-danger w-100">Giriş Yap</button>
         </form>

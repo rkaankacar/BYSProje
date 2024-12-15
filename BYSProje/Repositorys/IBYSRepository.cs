@@ -16,5 +16,8 @@ namespace BYSProje.Repositorys
         Task<T> GetByConditionAsync(int userNo, string password);
         Task<List<Student_Courses>> GetCoursesByStudentIdAsync(int studentId);
         Task<List<Courses>> GetAllCoursesAsync();
+        Task<Student_Courses> GetStudentCourseAsync(int studentId, int courseId);
+        Task UpdateStudentCourseAsync(Student_Courses studentCourse);
+        
     }
 }
