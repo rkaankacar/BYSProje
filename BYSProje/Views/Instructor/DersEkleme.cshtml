@@ -1,7 +1,7 @@
 @{
-  Layout="_AkademisyenSayfa";
+    Layout ="_AkademisyenSayfa";
 }
-
+@model CourseViewModel
 <!DOCTYPE html>
 <html lang="tr">
 
@@ -15,28 +15,47 @@
 <body>
     <div class="content">
         <h2>Ders Ekle</h2>
-        <form>
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+
+        <form method="post" asp-controller="Instructor" asp-action="DersEkleme" asp-route-id="@Model?.InstructorID" novalidate>
+              <div class="mb-3">
+                <label asp-for="InstructorID" class="form-label">Akademisyen No</label>
+                <input type="text" class="form-control" asp-for="InstructorID" readonly>
+                <span asp-validation-for="InstructorID" class="text-danger"></span>
+            </div>
+
             <div class="mb-3">
-                <label for="ders-kodu" class="form-label">Ders Kodu:</label>
-                <input type="text" class="form-control" id="ders-kodu" placeholder="Ders kodunu girin">
+                <label asp-for="CourseName" class="form-label">Ders Adı</label>
+                <input type="text" class="form-control" asp-for="CourseName" placeholder="Ders adını girin">
+                <span asp-validation-for="CourseName" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label for="ders-adi" class="form-label">Ders Adı:</label>
-                <input type="text" class="form-control" id="ders-adi" placeholder="Ders adını girin">
+                <label asp-for="Credits" class="form-label">Kredi</label>
+                <input type="number" class="form-control" asp-for="Credits" placeholder="Ders kredisini girin">
+                <span asp-validation-for="Credits" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label for="kredi" class="form-label">Kredi:</label>
-                <input type="number" class="form-control" id="kredi" placeholder="Ders kredisini girin">
+                <label asp-for="Explanation" class="form-label">Açıklama</label>
+                <textarea class="form-control" asp-for="Explanation" rows="4" placeholder="Dersin açıklamasını girin"></textarea>
+                <span asp-validation-for="Explanation" class="text-danger"></span>
             </div>
-            <div class="mb-3">
-                <label for="ders-aciklama" class="form-label">Ders Açıklaması:</label>
-                <textarea class="form-control" id="ders-aciklama" rows="4" placeholder="Dersin açıklamasını girin"></textarea>
-            </div>
-            <button type="submit" class="btn btn-danger">Ders Ekle</button>
+
+            <button type="submit" class="btn btn-danger">Dersi Kaydet</button>
         </form>
     </div>
 </body>
 
 </html>
-
-

@@ -15,10 +15,12 @@ namespace BYSProje.Controllers
     {
         private readonly ILogger<InstructorController> _logger;
          private readonly IBYSService<Instructors> _instructorService;
-        public InstructorController(ILogger<InstructorController> logger,IBYSService<Instructors> instructorService)
+          private readonly IBYSService<Courses> _courseService;
+        public InstructorController(ILogger<InstructorController> logger,IBYSService<Instructors> instructorService,IBYSService<Courses> courseService)
         {
             _logger = logger;
             _instructorService = instructorService;
+            _courseService = courseService;
         }
         
         [HttpGet("AkademisyenSayfasi")]
@@ -35,9 +37,6 @@ namespace BYSProje.Controllers
             return View("AkademisyenSayfasi",model);
         }
         
-
-
-
         [HttpGet("ProfilGuncelleme/{id}")]
         public async Task<IActionResult> ProfilGuncelleme(int id)
         {   var instructor = await _instructorService.GetByIDAsync(id);
@@ -77,21 +76,50 @@ namespace BYSProje.Controllers
 
         [HttpPost("DersAtama/{id}")]
         public IActionResult lessonPost()
+
         {
            return View();
         }
+        
         [HttpGet("DersEkleme/{id}")]
-        public IActionResult DersEkleme()
-        {
-            return View();
+        public async Task<IActionResult> DersEkleme(int id)
+        {  var instructor = await _instructorService.GetByIDAsync(id);
+              if (instructor == null)
+              {
+                  TempData["ErrorMessage"] = "Eğitmen bulunamadı.";
+                  return RedirectToAction("ErrorPage"); // Hata sayfasına yönlendirme yapılabilir
+              }
+
+            var course = new CourseViewModel
+              {
+                  InstructorID = instructor.InstructorID
+              };
+
+                    return View(course);
         }
 
-        [HttpPost("DersEkleme/{id}")]
-        public IActionResult lessonAdd()
-        {
-            return View();
-        }
+      [HttpPost("DersEkleme/{id}")]
+       public async Task<IActionResult> DersEkleme(int id, CourseViewModel model)
+{
+    
 
+    if (!ModelState.IsValid)
+    {
+        await _courseService.AddAsync(new Courses
+        {
+            CourseName = model.CourseName,
+            Credits = model.Credits,
+            Explanation = model.Explanation,
+            InstructorID = model.InstructorID
+        });
+
+        TempData["SuccessMessage"] = "Ders başarıyla eklendi!";
+        return RedirectToAction("DersEkleme",new { id = model.InstructorID } );
+    }
+
+    TempData["ErrorMessage"] = "Veri doğrulama hatası oluştu.";
+    return View(model);
+}
       
 
 

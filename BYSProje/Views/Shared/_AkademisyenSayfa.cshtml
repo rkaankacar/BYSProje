@@ -53,10 +53,10 @@
         <div class="navbar-header">
             Öğrenci-Akademisyen Yönetim Sistemi
         </div>
-        <a asp-controller="Instructor" asp-action="DersEkleme" asp-route-id="@Model.InstructorID">Ders Seçimi</a>
+        <a asp-controller="Instructor" asp-action="DersEkleme" asp-route-id="@Model.InstructorID">Ders Ekleme</a>
         <a asp-controller="Instructor" asp-action="ProfilGuncelleme" asp-route-id="@Model.InstructorID">Profil Güncelleme</a>
         <input type="hidden" name="id" value="@Model.InstructorID" />
-        <a asp-controller="Instructor" asp-action="DersAtama" asp-route-id="@Model.InstructorID">Dersleri Görüntüleme</a>
+        <a asp-controller="Instructor" asp-action="DersAtama" asp-route-id="@Model.InstructorID">Dersleri Atama</a>
         <input type="hidden" name="id" value="@Model.InstructorID" />
         <a asp-controller="Home" asp-action="Index" class="mt-auto text-center">Çıkış Yap</a>
     </nav>
