@@ -55,10 +55,20 @@ namespace BYSProje.Controllers
         }
 
         [HttpPost("ProfilGuncelleme/{id}")]
-        public IActionResult updateProfile()
+        public async Task<IActionResult> ProfilGuncelleme(int id, InstructorsViewModel model)
         {
-          return View();
+             ModelState.Clear();
+
+             var instructor = await _instructorService.GetByIDAsync(id);
+              instructor.Email = model.Email;
+              instructor.Password = model.Password;
+
+              await _instructorService.UpdateAsync(instructor);
+
+             TempData["SuccessMessage"] = "Profil başarıyla güncellendi!";
+             return RedirectToAction("ProfilGuncelleme", new {id = instructor.InstructorID});
         }
+
         [HttpGet("DersAtama/{id}")]
         public IActionResult DersAtama()
         {

@@ -15,7 +15,14 @@
 <body>
     <div class="content">
         <h2>Profil Güncelleme</h2>
-        <form method="post" asp-action="ProfilGuncelle" asp-route-id="@Model.InstructorID">
+        
+         @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["SuccessMessage"]
+            </div> 
+        }
+        <form method="post" asp-action="ProfilGuncelleme" asp-route-id="@Model.InstructorID">
             <div class="mb-3">
                 <label for="email" class="form-label">E-posta:</label>
                 <input type="email" class="form-control" id="email" name="Email" value="@Model.Email" placeholder="E-posta adresinizi girin" required>
