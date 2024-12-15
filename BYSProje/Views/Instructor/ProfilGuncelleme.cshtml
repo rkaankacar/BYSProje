@@ -1,7 +1,7 @@
 @{
-  Layout="_AkademisyenSayfa";
+  Layout = "_AkademisyenSayfa";
 }
-
+@model InstructorsViewModel
 <!DOCTYPE html>
 <html lang="tr">
 
@@ -15,17 +15,25 @@
 <body>
     <div class="content">
         <h2>Profil Güncelleme</h2>
- <form method="post" asp-action="ProfilGuncelle" asp-route-id="@Model.StudentID">
-    <div class="mb-3">
-        <label for="email" class="form-label">Email:</label>
-        <input type="email" class="form-control" id="email" name="Email" value="@Model.Email" placeholder="Email adresinizi girin">
-    </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Şifre:</label>
-        <input type="password" class="form-control" id="password" name="Password" value="@Model.Password" placeholder="Yeni şifrenizi girin">
-    </div>
-    <button type="submit" class="btn btn-danger">Güncelle</button>
-</form>
+        <form method="post" asp-action="ProfilGuncelle" asp-route-id="@Model.InstructorID">
+            <div class="mb-3">
+                <label for="email" class="form-label">E-posta:</label>
+                <input type="email" class="form-control" id="email" name="Email" value="@Model.Email" placeholder="E-posta adresinizi girin" required>
+                @if (!string.IsNullOrEmpty(ViewData["EmailError"] as string))
+                {
+                    <div class="text-danger">@ViewData["EmailError"]</div>
+                }
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Şifre:</label>
+                <input type="password" class="form-control" id="password" name="Password" value="@Model.Password" placeholder="Yeni şifrenizi girin" required>
+                @if (!string.IsNullOrEmpty(ViewData["PasswordError"] as string))
+                {
+                    <div class="text-danger">@ViewData["PasswordError"]</div>
+                }
+            </div>
+            <button type="submit" class="btn btn-danger">Güncelle</button>
+        </form>
     </div>
 </body>
 

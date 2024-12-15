@@ -39,9 +39,19 @@ namespace BYSProje.Controllers
 
 
         [HttpGet("ProfilGuncelleme/{id}")]
-        public IActionResult ProfilGuncelleme()
+        public async Task<IActionResult> ProfilGuncelleme(int id)
+        {   var instructor = await _instructorService.GetByIDAsync(id);
+            
+              var model = new InstructorsViewModel
         {
-            return View();
+            InstructorID = instructor.InstructorID,
+            FirstName = instructor.FirstName,
+            LastName = instructor.LastName,
+            Email = instructor.Email,
+            Department = instructor.Department,
+            Password = instructor.Password
+        };
+            return View(model);
         }
 
         [HttpPost("ProfilGuncelleme/{id}")]
