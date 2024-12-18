@@ -24,6 +24,7 @@ namespace BYSProje.Models
     [Required(ErrorMessage = "Açıklama gereklidir.")]
     public string Explanation { get; set; }
     public ICollection<Student_Courses> StudentCourse { get; set; }
-     public int StudentID {get;set;}//ogrencidi vardı.
+    public int StudentID {get; set;}
+  
     }
 }

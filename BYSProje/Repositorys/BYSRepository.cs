@@ -114,6 +114,13 @@ namespace BYSProje.Repositorys
             _context.Student_Courses.Update(studentCourse); // Student_Courses tablosu için güncelleme işlemi
             await _context.SaveChangesAsync();
         }
+           
 
+
+
+
+         
     }
-}
+
+
+    }    

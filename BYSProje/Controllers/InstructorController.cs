@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using BYSProje.Models;
 using Microsoft.Identity.Client;
 using BYSProje.Services;
+using System.ComponentModel.DataAnnotations;
 namespace BYSProje.Controllers
 {
     [Route("[controller]")]
@@ -17,13 +18,15 @@ namespace BYSProje.Controllers
          private readonly IBYSService<Instructors> _instructorService;
           private readonly IBYSService<Courses> _courseService;
           private readonly IBYSService<Student_Courses> _studentcourseService;
-         
-        public InstructorController(ILogger<InstructorController> logger,IBYSService<Instructors> instructorService,IBYSService<Courses> courseService, IBYSService<Student_Courses> studencourseService)
+          
+          private readonly IBYSService<Student_Courses> _studentService;
+        public InstructorController(ILogger<InstructorController> logger,IBYSService<Instructors> instructorService,IBYSService<Courses> courseService, IBYSService<Student_Courses> studencourseService, IBYSService<Student_Courses> studentService)
         {
             _logger = logger;
             _instructorService = instructorService;
             _courseService = courseService;
             _studentcourseService = studencourseService;
+            _studentService = studentService;
             
         }
         
@@ -111,15 +114,21 @@ namespace BYSProje.Controllers
     TempData["ErrorMessage"] = "Veri doğrulama hatası oluştu.";
     return View(model);
 }
-      
-        
-         
-   
+    
+
+    }
+}
+
+
+
+
+
+
+
           
     
-    
-  }
 
 
 
-}
+
+

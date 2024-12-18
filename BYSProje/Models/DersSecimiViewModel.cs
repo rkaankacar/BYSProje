@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 namespace BYSProje.Models
 {
     public class DersSecimiViewModel
-    {
-         public int StudentID { get; set; }
+    {    public int StudentID { get; set; }
          public List<int> CourseIDs { get; set; }
          public List<Courses> SCourses { get; set; }
+         public string Id => $"{StudentID}-{CourseIDs}";
+       
     }
 }

@@ -83,19 +83,13 @@ namespace BYSProje.Services
                }
               
 
-                  public async Task ApproveCourseAsync(int studentId, int courseId)
-                {
-                   var studentCourse = await _repository.GetStudentCourseAsync(studentId, courseId);
-    
-                    if (studentCourse != null && !studentCourse.IsApproved)
-                   {
-                      studentCourse.IsApproved = true;
-                     await _repository.UpdateStudentCourseAsync(studentCourse); // UpdateStudentCourseAsync kullanarak sadece Student_Courses için güncelleme
-                   }
-                }
-          
+              
+
+            
+                
+                
+
+
 
     }
-        
-   
 }

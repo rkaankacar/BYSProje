@@ -19,5 +19,7 @@ namespace BYSProje.Repositorys
         Task<Student_Courses> GetStudentCourseAsync(int studentId, int courseId);
         Task UpdateStudentCourseAsync(Student_Courses studentCourse);
         
+        
+        
     }
 }

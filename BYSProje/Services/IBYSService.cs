@@ -18,7 +18,9 @@ namespace BYSProje.Services
           Task<List<CourseViewModel>> GetCoursesByStudentIdAsync(int studentId);
           Task<List<Courses>> GetAllCoursesAsync();
            
-         Task ApproveCourseAsync(int studentId, int courseId);
+          
+        
+         
          
     }
 }

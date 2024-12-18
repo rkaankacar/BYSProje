@@ -41,6 +41,7 @@ namespace BYSProje.DBContext.Entity;
             entity.Property(e =>e.Credits).HasColumnType("float");
             entity.Property(e => e.InstructorID).HasColumnName("InstructorID");
             entity.Property(e =>e.Explanation).HasMaxLength(100);
+           
             
             entity.HasOne(d => d.Instructor)
             .WithMany(p => p.Courses)
@@ -61,6 +62,7 @@ namespace BYSProje.DBContext.Entity;
                entity.Property(e => e.Email).HasMaxLength(100);
                entity.Property(e => e.Department).HasMaxLength(50);
                entity.Property(e => e.Password).HasMaxLength(50);
+               
            });
 
            modelBuilder.Entity<Students>( entity =>
@@ -92,10 +94,9 @@ namespace BYSProje.DBContext.Entity;
               entity.ToTable("Student_Courses");
               entity.Property(e => e.StudentID).HasColumnName("StudentID");
               entity.Property(e => e.CourseID).HasColumnName("CourseID");
-              entity.Property(e => e.IsApproved).HasColumnName("IsApproved").HasDefaultValue(false);
-              
+            
 
-               entity.HasOne(d => d.Student)
+                entity.HasOne(d => d.Student)
                 .WithMany(p => p.StudentCourse)
                 .HasForeignKey(d => d.StudentID)
                 .OnDelete(DeleteBehavior.ClientSetNull)
